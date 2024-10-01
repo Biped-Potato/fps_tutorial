@@ -1,0 +1,10 @@
+[package]
+name = "fps_tutorial"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy = { version = "0.14.2", features = ["dynamic_linking"] }
+bevy_rapier3d = "0.27.0"
+[profile.dev]
+opt-level = 1
