@@ -1,10 +1,13 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::Collider;
 
+use super::targets;
 pub struct LevelPlugin;
 impl Plugin for LevelPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, init_level);
+        app
+        .add_plugins(targets::TargetsPlugin)
+        .add_systems(Startup, init_level);
     }
 }
 

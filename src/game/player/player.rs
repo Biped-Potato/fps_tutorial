@@ -1,7 +1,7 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 use bevy_rapier3d::{plugin::RapierContext, prelude::QueryFilter};
 
-use crate::game::shooting::tracer::{BulletTracer, TracerPlugin};
+use crate::game::{level::targets::{DeadTarget, Target}, shooting::tracer::{BulletTracer, TracerPlugin}};
 
 use super::camera_controller::{self, CameraController};
 pub struct PlayerPlugin;
@@ -46,6 +46,7 @@ fn update_player(
         &mut GlobalTransform,
         &mut Camera,
     )>,
+    target_query : Query<Entity,With<Target>>,
     window_query: Query<&Window, With<PrimaryWindow>>,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
@@ -67,7 +68,11 @@ fn update_player(
                 true,
                 QueryFilter::default(),
             );
-            if let Some((_entity, ray_intersection)) = hit {
+            if let Some((entity, ray_intersection)) = hit {
+                if let Ok(_entity) = target_query.get(entity)
+                {
+                    commands.entity(entity).insert(DeadTarget);
+                } 
                 let tracer_material = StandardMaterial {
                     base_color: Color::srgb(1., 1., 0.),
                     unlit: true,
