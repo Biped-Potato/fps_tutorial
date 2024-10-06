@@ -4,6 +4,6 @@ pub mod game;
 
 fn main() {
     App::new()
-    .add_plugins(DefaultPlugins)
-    .run();
+        .add_plugins((game::game::GamePlugin, DefaultPlugins))
+        .run();
 }
