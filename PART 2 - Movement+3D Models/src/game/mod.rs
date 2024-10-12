@@ -5,3 +5,4 @@ pub mod player;
 pub mod shooting;
 pub mod ui;
 pub mod window;
+pub mod math;
