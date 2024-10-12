@@ -1,3 +1,5 @@
+use crate::game::player::player_shooting::Shootable;
+
 use super::targets;
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
@@ -25,6 +27,7 @@ fn init_level(
             mesh: meshes.add(Plane3d::new(Vec3::Y, Vec2::splat(1000.))),
             ..default()
         },
+        Shootable,
     ));
     commands.spawn((
         Collider::cuboid(30., 30., 30.),
@@ -34,6 +37,7 @@ fn init_level(
             mesh: meshes.add(Cuboid::from_length(60.)),
             ..default()
         },
+        Shootable,
     ));
 
     commands.spawn(DirectionalLightBundle {

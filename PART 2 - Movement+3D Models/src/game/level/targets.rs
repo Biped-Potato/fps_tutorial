@@ -5,6 +5,8 @@ use bevy_rapier3d::prelude::*;
 use rand::*;
 use rngs::ThreadRng;
 
+use crate::game::player::player_shooting::Shootable;
+
 pub struct TargetsPlugin;
 impl Plugin for TargetsPlugin {
     fn build(&self, app: &mut App) {
@@ -68,6 +70,7 @@ fn init_grid_shot(
                 ..default()
             },
             Target {},
+            Shootable,
             DeadTarget,
         ));
     }
